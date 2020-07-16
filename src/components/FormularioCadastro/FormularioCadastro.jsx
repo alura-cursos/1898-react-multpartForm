@@ -5,16 +5,20 @@ import DadosEntrega from "./DadosEntrega";
 
 import { Typography } from "@material-ui/core";
 function FormularioCadastro({ aoEnviar, validarCPF }) {
-  const [etapaAtual, setEtapaAtual] = useState(1);
+  const [etapaAtual, setEtapaAtual] = useState(0);
+
+  function proximo(){
+    setEtapaAtual(etapaAtual+1);
+  }
 
   function formularioAtual(etapa) {
     switch (etapa) {
       case 0:
-        return <DadosUsuario />;
+        return <DadosUsuario aoEnviar={proximo} />;
       case 1:
-        return <DadosPessoais aoEnviar={aoEnviar} validarCPF={validarCPF} />;
+        return <DadosPessoais aoEnviar={proximo} validarCPF={validarCPF} />;
       case 2:
-        return <DadosEntrega />;
+        return <DadosEntrega  aoEnviar={aoEnviar}/>;
       default:
         return <Typography>Erro ao selecionar formulário</Typography>;
     }
